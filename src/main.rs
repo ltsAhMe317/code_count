@@ -34,11 +34,12 @@ fn main() {
     } else {
         "./src/".to_string()
     };
-    let find = find_all_rs(path);
+    let mut find = find_all_rs(path);
     let mut all_count = 0;
     for (_, size) in find.iter() {
         all_count += size;
     }
+    find.sort_by(|(_, size1), (_, size2)| size1.cmp(size2));
     for (path, size) in find.iter() {
         println!("{}:{}", path.file_name().unwrap().to_str().unwrap(), size);
     }
