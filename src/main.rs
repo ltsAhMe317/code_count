@@ -43,8 +43,8 @@ fn main() {
     find.sort_by(|(_, size1), (_, size2)| size1.cmp(size2));
     let mut count = 0;
     for (path, size) in find.iter() {
-        println!("{}:{}", path.file_name().unwrap().to_str().unwrap(),chinese_number::from_u64_to_chinese_low(ChineseVariant::Simple,ChineseCase::Lower, *size as u64).unwrap());
+        println!("{}:{}", path.file_name().unwrap().to_str().unwrap(),chinese_number::from_usize_to_chinese_low(ChineseVariant::Simple,ChineseCase::Lower, *size).unwrap());
         count += size;
     }
-    println!("共{}",chinese_number::from_u64_to_chinese_low(ChineseVariant::Simple,ChineseCase::Lower, count as u64).unwrap())
+    println!("共{}",chinese_number::from_usize_to_chinese_middle(ChineseVariant::Simple,ChineseCase::Lower, count))
 }
