@@ -2,6 +2,7 @@ use std::fmt::Display;
 use std::fs;
 use std::io::stdout;
 use std::path::{Path, PathBuf};
+use chinese_number::{ChineseCase, ChineseCountMethod, ChineseVariant, NumberToChinese, ChineseToNumber};
 
 pub fn find_all_rs(path: impl AsRef<Path>) -> Vec<(PathBuf, usize)> {
     let path = path.as_ref();
@@ -40,7 +41,10 @@ fn main() {
         all_count += size;
     }
     find.sort_by(|(_, size1), (_, size2)| size1.cmp(size2));
+    let mut count = 0;
     for (path, size) in find.iter() {
-        println!("{}:{}", path.file_name().unwrap().to_str().unwrap(), size);
+        println!("{}:{}", path.file_name().unwrap().to_str().unwrap(),chinese_number::from_u64_to_chinese_low(ChineseVariant::Simple,ChineseCase::Lower, *size as u64).unwrap());
+        count += size;
     }
+    println!("共{}",chinese_number::from_u64_to_chinese_low(ChineseVariant::Simple,ChineseCase::Lower, count as u64).unwrap())
 }
