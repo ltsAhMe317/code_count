@@ -20,7 +20,7 @@ pub fn find_all_rs(path: impl AsRef<Path>) -> Vec<(PathBuf, usize)> {
             if suffix == "rs" {
                 vec.push((
                     path.to_path_buf(),
-                    fs::read_to_string(path).unwrap().trim().len(),
+                    fs::read_to_string(path).unwrap().trim().lines().collect::<Vec<&str>>().len(),
                 ));
             }
         }
