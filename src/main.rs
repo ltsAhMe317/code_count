@@ -30,11 +30,13 @@ pub fn find_all_rs(path: impl AsRef<Path>) -> Vec<(PathBuf, usize)> {
 fn main() {
     let mut args = std::env::args();
     args.next();
+    args.next();
     let path = if let Some(str) = args.next() {
         str.trim().to_string()
     } else {
         "./src/".to_string()
     };
+    println!("src dir:{:?}",path);
     let mut find = find_all_rs(path);
     let mut all_count = 0;
     for (_, size) in find.iter() {
